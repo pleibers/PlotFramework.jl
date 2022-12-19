@@ -1,0 +1,7 @@
+name = "PlotFramework"
+uuid = "d2348bf5-d10f-4db2-a855-1276a9c0f7f4"
+authors = ["Patrick Leibersperger <pleibersperger@posteo.de> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1.8"
