@@ -1,5 +1,11 @@
 using JLD2
 
+function setPlotEnv(; logging=false, design="default", log_path=ENV["HOME"] * "/julia/log/plot.txt")
+    global PlotEnvironment = PlotEnv(logging, design, log_path)
+    set_design(design)
+    return PlotEnvironment
+end
+
 get_date() = Dates.format(now(), "yyyy-mm-dd HH:MM")
 
 function read_log(line, date, fig_name, plotter::PlotEnv; inFILE = false)
@@ -27,10 +33,10 @@ function read_log(line, date, fig_name, plotter::PlotEnv; inFILE = false)
     args_path = dirname(plotter.log_path) * "/args/$date.jld2"
     fun = vals[3]
     if inFILE
-        @load args_path args FILE
-        return fun, args, FILE
+        @load args_path args kwargs FILE
+        return fun, args, kwargs, FILE
     else
-        @load args_path args
-        return fun, args
+        @load args_path args kwargs
+        return fun, args, kwargs
     end
 end
