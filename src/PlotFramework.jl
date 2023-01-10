@@ -16,7 +16,9 @@ struct PlotEnv
         design::String
         log_path::String
 end
-
+function PlotEnv(; logging=false, design="default", log_path=ENV["HOME"] * "/julia/log/plot.txt")
+        return PlotEnv(logging, design, log_path)
+end
 
 include("utils.jl")
 include("design.jl")
