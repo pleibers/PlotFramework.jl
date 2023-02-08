@@ -9,14 +9,15 @@ export set_design,
         setPlotEnv,
         recreate_plot,
         get_date,
-        @log
+        @log,
+        @logtolib
 
 struct PlotEnv
         logging::Bool
-        design::String
+        design::Symbol
         log_path::String
 end
-function PlotEnv(; logging=false, design="default", log_path=ENV["HOME"] * "/julia/log/plot.txt")
+function PlotEnv(; logging=false, design=:default, log_path=ENV["HOME"] * "/julia/log/plot.txt")
         return PlotEnv(logging, design, log_path)
 end
 

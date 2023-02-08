@@ -1,21 +1,4 @@
-macro log(f)
-    log_plot(f, (), (); log_path=PlotEnvironment.log_path)
-    return :($(esc(f))())
-end
 
-macro log(f, args...)
-    aargs = []
-    aakws = Pair{Symbol,Any}[]
-    for el in args
-        if Meta.isexpr(el, :(=))
-            push!(aakws, Pair(el.args...))
-        else
-            push!(aargs, esc(el))
-        end
-    end
-    log_plot(f, aargs, aakws, log_path=PlotEnvironment.log_path)
-    return :($(esc(f))($(aargs...); $aakws...))
-end
 
 function (plotter::PlotEnv)(f::Function, args; kwargs=(), fig_name="")
     if plotter.logging

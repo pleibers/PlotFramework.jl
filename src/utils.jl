@@ -1,6 +1,6 @@
 using JLD2
 
-function setPlotEnv(; logging=false, design="default", log_path=ENV["HOME"] * "/julia/log/plot.txt")
+function setPlotEnv(; logging=false, design=:default, log_path=ENV["HOME"] * "/julia/log/plot.txt")
     global PlotEnvironment = PlotEnv(logging, design, log_path)
     set_design(design)
     return PlotEnvironment
@@ -40,3 +40,17 @@ function read_log(line, date, fig_name, plotter::PlotEnv; inFILE = false)
         return fun, args, kwargs
     end
 end
+
+function clear_log(;path="")
+    if isempty(path)
+        home = ENV["HOME"]
+        try
+            rm(home*"julia/log/",recursive=true)
+        catch
+            println("Log not found")
+        end
+    else
+        rm(path,recursive=true)
+    end
+end
+        
