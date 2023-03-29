@@ -54,3 +54,22 @@ function clear_log(;path="")
     end
 end
         
+function set_size_in_points(;width_pts = 469.0, height=0,dpi=300)
+    inches_per_pt = 1.0 / 72.27
+    width_inches = width_pts * inches_per_points
+    width_px = width_inches * dpi
+
+    height_px = 0
+    if height != 0
+        height_inches = height * inches_per_points
+        height_px = height_inches * dpi
+    else
+        # Golden ratio to set aesthetic figure height
+        golden_ratio = (sqrt(5) - 1.0) / 2.0
+        # Height in inches
+        height_inches = width*golden_ratio * inches_per_pt
+        # Set the size!
+        height_px = height_inches * dpi
+    end
+    default(size=(width_px, height_px))
+end
