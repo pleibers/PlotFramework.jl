@@ -9,6 +9,7 @@ export set_design,
         setPlotEnv,
         recreate_plot,
         get_date,
+        set_size_in_points,
         @log,
         @logtolib
 
